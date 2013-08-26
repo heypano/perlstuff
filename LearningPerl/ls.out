@@ -1,0 +1,27 @@
+total 76
+-rwxrwxrwx+ 1 ppapadatos ppapadatos  374 Aug  2 13:33 chapter10.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos  689 Aug  2 14:50 chapter11.pl
+-rwxrwxrwx  1 ppapadatos ppapadatos 1002 Aug  5 14:30 chapter12.pl
+-rwxrwxrwx  1 ppapadatos ppapadatos 1431 Aug  6 14:44 chapter13.pl
+-rwxrwxrwx  1 ppapadatos ppapadatos  979 Aug  7 14:42 chapter14.pl
+-rwxrwxrwx  1 ppapadatos ppapadatos 1508 Aug  8 15:27 chapter15.pl
+-rwxrwxrwx  1 ppapadatos ppapadatos  312 Aug 14 17:41 chapter16.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos 1087 Jul 31 14:57 chapter4.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos  235 Jul 31 14:57 chapter5.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos  781 Jul 31 14:57 chapter6.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos  433 Jul 31 14:57 chapter7.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos  451 Jul 31 14:57 chapter8.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos 2243 Jul 31 14:58 chapter9.pl
+-rw-rwxr--+ 1 ppapadatos ppapadatos 1950 Jul  3 13:58 coursera.js
+-r--r--r--+ 1 ppapadatos ppapadatos  165 Jul 18 11:26 input.txt
+-rw-rw-r--  1 ppapadatos ppapadatos    0 Aug 14 17:41 ls.err
+-rw-rw-r--  1 ppapadatos ppapadatos    0 Aug 14 17:41 ls.out
+-rwxrwxrwx+ 1 ppapadatos ppapadatos   79 Jul 31 14:56 removeCopyright.pl
+-rwxrwxrwx+ 1 ppapadatos ppapadatos  833 Jul  8 15:19 sfPerlPathFix.pl
+-rw-rwxr--+ 1 ppapadatos ppapadatos    0 Jul 31 14:41 testfile.bak
+-rw-rwxr--+ 1 ppapadatos ppapadatos  139 Jul 31 14:43 testfile.safe
+lrwxrwxrwx  1 ppapadatos ppapadatos   13 Aug  6 14:43 testfile.safesoftlink -> testfile.safe
+lrwxrwxrwx  1 ppapadatos ppapadatos   13 Aug  6 14:43 testfile.safesoftlink2 -> testfile.safe
+lrwxrwxrwx  1 ppapadatos ppapadatos   13 Aug  6 14:43 testfile.safesoftlink3 -> testfile.safe
+lrwxrwxrwx  1 ppapadatos ppapadatos   13 Aug  6 14:43 testfile.safesoftlink4 -> testfile.safe
+-rwxrwxrwx  1 ppapadatos ppapadatos  436 Aug  5 12:11 various.pl
