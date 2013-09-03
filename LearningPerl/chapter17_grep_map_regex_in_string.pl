@@ -39,3 +39,5 @@ sub ex2{
 		printf "%-30s %15s %15s\n",$_, $accesstime, $modtime;
 	}
 }
+
+
