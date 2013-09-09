@@ -1,9 +1,15 @@
 #! /usr/bin/perl
 
 
-ex2();
+#ex2();
+hashSlices();
 
-
+sub hashSlices{
+ my %hash = (bla => 'one', bli => 'two', blo => 'three', ble => 'four');
+ my @the_ones_we_want = ('bla','ble');
+ my @value_slice = @hash{@the_ones_we_want};
+ print "@value_slice\n";
+}
 
 sub ex1{
 	die "Give me the name of the file and just that.\n" if(@ARGV!=1);

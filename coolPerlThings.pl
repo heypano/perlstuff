@@ -1,4 +1,52 @@
 #! /usr/bin/perl
+use Data::Dumper;
+$Data::Dumper::Sortkeys = 1;
+settingElementsToOneInHashRef();
+
+
+#Set multiple keys to 1 in one line without for
+sub settingElementsToOneInHashRef{
+    my %hash = (a => 1, b => 1, c => 1);
+    my $hashref = \%hash;
+    modifyHashRef2($hashref);
+    print Dumper($hashref);
+    
+    #Inline helper function
+    sub modifyHashRef2{
+        my $hashref = shift;
+        my @keys = ('d','e','f','g','h','i');
+        
+        #this is the line
+        @$hashref{@keys}=(1)x(@keys);
+    };
+}
+
+#Adding elements to a hash reference using hash slices
+sub addingElementsToAHashRefWithHashSlices_alsoInlineFunction{
+    my %hash = (a => '1', b => '2', c => '3');
+    my $hashref = \%hash;
+    modifyHashRef($hashref);
+    print Dumper($hashref);
+    
+    #Inline helper function
+    sub modifyHashRef{
+        my $hashref = shift;
+        my @keys = ('d','e','f','g','h','i');
+        my @values = ('4','5','6','7','8','9');
+        @$hashref{@keys}=@values;
+    };
+}
+
+
+
+#Adds elements to a hash using hash slices
+sub addingElementsToAHashWithHashSlices{
+    my %hash = (a => '1', b => '2', c => '3');
+    my @keys = ('d','e','f');
+    my @values = ('4','5','6');
+    @hash{@keys} = @values;
+    print Dumper($hashref)
+}
 
 #Returns an array or a scalar based on the context
 #my $sc = differentReturnBasedOnContext();
