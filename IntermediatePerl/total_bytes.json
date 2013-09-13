@@ -1,0 +1,21 @@
+{
+   "fileserver.copyroom.hut" : {
+      "thurston.howell.hut" : 22932,
+      "maryann.girl.hut" : 9414
+   },
+   "skipper.crew.hut" : {
+      "gilligan.crew.hut" : 11331,
+      "maryann.girl.hut" : 17289
+   },
+   "thurston.howell.hut" : {
+      "lovey.howell.hut" : 36414
+   },
+   "gilligan.crew.hut" : {
+      "zaryann.girl.hut" : 10620,
+      "bovey.howell.hut" : 42489,
+      "easer3.copyroom.hut" : 84168
+   },
+   "professor.hut" : {
+      "ginger.girl.hut" : 51912
+   }
+}
