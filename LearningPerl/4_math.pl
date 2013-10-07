@@ -30,7 +30,7 @@ sub above_average{
 
 sub greet{
 	state @people;
-	if(!defined @people){
+	if(!@people){
 		@people = @_;
 		print "Hi $_[0], you are the first person here!\n";	
 	}
