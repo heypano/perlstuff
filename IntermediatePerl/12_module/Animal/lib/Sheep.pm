@@ -1,12 +1,11 @@
-package Animal;
+package Sheep;
 
-use 5.006;
 use strict;
 use warnings FATAL => 'all';
-use parent qw(LivingCreature);
+use parent qw(Animal);
 =head1 NAME
 
-Animal - The great new Animal!
+Sheep - The great new Sheep!
 
 =head1 VERSION
 
@@ -23,9 +22,9 @@ Quick summary of what the module does.
 
 Perhaps a little code snippet.
 
-    use Animal;
+    use Sheep;
 
-    my $foo = Animal->new();
+    my $foo = Sheep->new();
     ...
 
 =head1 EXPORT
@@ -35,14 +34,13 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =head1 SUBROUTINES/METHODS
 
-=head2 function1
+=head2 speak
 
 =cut
 
-sub speak {
-  my $class = shift;
-  $class->SUPER::speak($class->sound);
-}
+# In lib/Sheep.pm
+sub sound { 'baaaah' }
+
 
 =head2 function2
 
@@ -68,7 +66,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Animal
+    perldoc Sheep
 
 
 You can also look for information at:
@@ -140,4 +138,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Animal
+1; # End of Sheep

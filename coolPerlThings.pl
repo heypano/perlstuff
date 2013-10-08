@@ -1,34 +1,41 @@
 #! /usr/bin/perl
 use Data::Dumper;
 $Data::Dumper::Sortkeys = 1;
-settingElementsToOneInHashRef();
+capitalizeFirst("bbaskfalsfQWELFKFAELFKAEoaelokeakcekACELkcae  ELAKALE kCalk alk");
 
+# Capitalizes the first letter
+sub capitalizeFirst{
+    my ($string) = @_;
+    $string = ucfirst lc $string;
+    print "Capitalized the first letter and lowercased the rest: ".$string."\n";
+    return ucfirst lc $_;
+}
 
-#Set multiple keys to 1 in one line without for
+# Set multiple keys to 1 in one line without for
 sub settingElementsToOneInHashRef{
     my %hash = (a => 1, b => 1, c => 1);
     my $hashref = \%hash;
     modifyHashRef2($hashref);
     print Dumper($hashref);
     
-    #Inline helper function
+    # Inline helper function
     sub modifyHashRef2{
         my $hashref = shift;
         my @keys = ('d','e','f','g','h','i');
         
-        #this is the line
+        # this is the line
         @$hashref{@keys}=(1)x(@keys);
     };
 }
 
-#Adding elements to a hash reference using hash slices
+# Adding elements to a hash reference using hash slices
 sub addingElementsToAHashRefWithHashSlices_alsoInlineFunction{
     my %hash = (a => '1', b => '2', c => '3');
     my $hashref = \%hash;
     modifyHashRef($hashref);
     print Dumper($hashref);
     
-    #Inline helper function
+    # Inline helper function
     sub modifyHashRef{
         my $hashref = shift;
         my @keys = ('d','e','f','g','h','i');
@@ -39,7 +46,7 @@ sub addingElementsToAHashRefWithHashSlices_alsoInlineFunction{
 
 
 
-#Adds elements to a hash using hash slices
+# Adds elements to a hash using hash slices
 sub addingElementsToAHashWithHashSlices{
     my %hash = (a => '1', b => '2', c => '3');
     my @keys = ('d','e','f');
@@ -48,10 +55,10 @@ sub addingElementsToAHashWithHashSlices{
     print Dumper($hashref)
 }
 
-#Returns an array or a scalar based on the context
-#my $sc = differentReturnBasedOnContext();
-#my @arr = differentReturnBasedOnContext();
-#print "sc is $sc and arr is @arr\n";
+# Returns an array or a scalar based on the context
+# my $sc = differentReturnBasedOnContext();
+# my @arr = differentReturnBasedOnContext();
+# print "sc is $sc and arr is @arr\n";
 sub differentReturnBasedOnContext{
     
     if(wantarray)
@@ -65,8 +72,8 @@ sub differentReturnBasedOnContext{
 }
 
 
-#Interpolating a function call in a string
-#interpolatingAFunctionCall();
+# Interpolating a function call in a string
+# interpolatingAFunctionCall();
 
 sub interpolatingAFunctionCall{
 	print "String says:\n";
@@ -78,8 +85,8 @@ sub thisString{
 }
 
 
-#Hash assignment
-#hashAssignment();
+# Hash assignment
+# hashAssignment();
 sub hashAssignment{
 	my %hash = (bla=>"bla",ble=>"bleeeeeh",one=>"no",two=>"no");
 	for my $key (keys %hash){
@@ -94,8 +101,8 @@ sub hashAssignment{
 	}
 }
 
-#Read file into array
-#readFile("chapter13.pl");
+# Read file into array
+# readFile("chapter13.pl");
 sub readFile{
 	my $fileName = shift;
 	open my $fh,'<',$fileName or die("Can't open $fileName\n");

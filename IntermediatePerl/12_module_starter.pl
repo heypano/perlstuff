@@ -11,7 +11,7 @@ What I did was:
  
 sudo cpan Module::Starter;
 mkdir ~/.module-starter/;
-echo -e "Author: Pano Papadatos\nemail: pano@heypano.com\nbuilder: Module::Build\nverbose: 1" > ~/.module-starter/config;
+echo -e "Author: Pano Papadatos\nemail: pano@heypano.com\nbuilder: Module::Build\nverbose: 1\nplugins: Module::Starter::AddModule" > ~/.module-starter/config;
 cd ~/checkouts/LearningPerl/IntermediatePerl/;
 mkdir 12_module;
 cd 12_module;

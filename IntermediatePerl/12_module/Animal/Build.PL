@@ -19,7 +19,7 @@ my $builder = Module::Build->new(
         #'ABC'              => 1.6,
         #'Foo::Bar::Module' => 5.0401,
     },
-    add_to_cleanup     => [ 'Animal-*' ],
+    add_to_cleanup     => [ './Animal-*' ],
     create_makefile_pl => 'traditional',
 );
 
