@@ -1,7 +1,13 @@
 #! /usr/bin/perl
 use Data::Dumper;
 $Data::Dumper::Sortkeys = 1;
-capitalizeFirst("bbaskfalsfQWELFKFAELFKAEoaelokeakcekACELkcae  ELAKALE kCalk alk");
+
+# trim with prototypes
+sub trim (\$){
+    my ($string) = @_;
+    $$string =~ s/^([\s]+)//;
+    $$string =~ s/([\s]+)$//;
+}
 
 # Capitalizes the first letter
 sub capitalizeFirst{
