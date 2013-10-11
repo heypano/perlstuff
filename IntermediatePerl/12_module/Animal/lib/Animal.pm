@@ -39,6 +39,41 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =cut
 
+sub default_color{'Muddy'};
+
+sub get_color{
+    ref(my $self = shift) or die("get_color needs a reference");
+    return $self->{color};
+}
+
+sub set_color{
+    ref(my $self = shift) or die("set_color needs a reference");
+    my $color = shift;
+    $self->{color} = $color;
+    return $self;
+}
+sub get_name{
+    ref(my $self = shift) or die("get_name needs a reference");
+    return $self->{name};
+}
+
+sub set_name{
+    ref(my $self = shift) or die("set_name needs a reference");
+    my $name = shift;
+    $self->{name} = $name;
+    return $self;
+}
+
+sub named{
+    ref(my $class = shift) and die "class name needed";
+    my $name = shift;
+    my $animal = {name => $name, color => $class->default_color};
+    bless $animal, $class;  
+    return $animal;
+}
+
+
+
 sub speak {
   my $class = shift;
   $class->SUPER::speak($class->sound);
