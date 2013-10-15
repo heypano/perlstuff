@@ -1,17 +1,18 @@
-package My::List::Util;
+package Oogaboogoo;
 
 use 5.006;
 use strict;
 use warnings FATAL => 'all';
 use Exporter qw/import/;
-our @EXPORT = qw/sum shuffle/;
+our @EXPORT = qw/number_to_day_name number_to_month_name/;
 our @EXPORT_OK = ();
 our %EXPORT_TAGS = (
   all       => [ @EXPORT, @EXPORT_OK ],
 );
+
 =head1 NAME
 
-My::List::Util - The great new My::List::Util!
+Oogaboogoo - The great new Oogaboogoo!
 
 =head1 VERSION
 
@@ -24,42 +25,45 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Sums and Shuffles lists
+Quick summary of what the module does.
 
+Perhaps a little code snippet.
+
+    use Oogaboogoo;
+
+    my $foo = Oogaboogoo->new();
+    ...
 
 =head1 EXPORT
 
-sum, shuffle
+A list of functions that can be exported.  You can delete this section
+if you don't export anything, such as for a purely object-oriented module.
 
 =head1 SUBROUTINES/METHODS
 
-=head2 sum
+=head2 number_to_day_name
 
 =cut
 
-sub sum {
-  my $sum;
-  foreach my $num ( grep {  /\A-?\d+\.*\d*\z/ } @_ ) {
-    $sum += $num;
-  }
-  $sum;
+sub number_to_day_name{
+    my ($num) = @_;
+    my @day = qw(ark dip wap sen pop sep kir);
+    die "\$num cannot be more than ".@day if ($num > $#day);
+    return $day[$num];
 }
 
-=head2 shuffle
+
+
+=head2 number_to_month_name
 
 =cut
 
-sub shuffle {
-  my @deck = @_;
-  return unless @deck;
-
-  my $i = @deck;
-  while( --$i ) {
-  my $j = int rand ($i+1);
-  @deck[$i,$j] = @deck[$j,$i];
-  }
-  @deck;
-}
+sub number_to_month_name{
+    my ($num) = @_;
+    my @month = qw(diz pod bod rod sip wax lin sen kun fiz nap dep);
+    die "\$num cannot be more than ".@month if ($num > $#month);
+    return $month[$num];
+} 
 
 =head1 AUTHOR
 
@@ -67,8 +71,8 @@ Pano Papadatos, C<< <pano at heypano.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-my-list-util at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=My-List-Util>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-oogaboogoo at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Oogaboogoo>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 
@@ -78,7 +82,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc My::List::Util
+    perldoc Oogaboogoo
 
 
 You can also look for information at:
@@ -87,19 +91,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=My-List-Util>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Oogaboogoo>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/My-List-Util>
+L<http://annocpan.org/dist/Oogaboogoo>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/My-List-Util>
+L<http://cpanratings.perl.org/d/Oogaboogoo>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/My-List-Util/>
+L<http://search.cpan.org/dist/Oogaboogoo/>
 
 =back
 
@@ -150,4 +154,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of My::List::Util
+1; # End of Oogaboogoo

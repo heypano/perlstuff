@@ -22,6 +22,9 @@ perl Build.PL;
 ./Build test;
 ./Build disttest;
 ./Build dist;
+perl Makefile.PL;
+make;
+sudo make install;
 
 THISTHING
 
