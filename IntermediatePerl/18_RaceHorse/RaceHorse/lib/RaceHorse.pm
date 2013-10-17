@@ -5,6 +5,7 @@ use strict;
 use warnings FATAL => 'all';
 use parent qw/Horse/;
 use Storable qw/nstore retrieve/;
+use Pano::Util qw/:all/;
 use Data::Dumper;
 =head1 NAME
 
@@ -43,15 +44,22 @@ if you don't export anything, such as for a purely object-oriented module.
 
 ## extend parent constructor:
 sub named {
-  my $self = shift->SUPER::named(@_);
-  $self->{$_} = 0 for qw(wins places shows losses);
-  my $old = $self->get_from_memory;
-  print "New Race horse named @_\n";
-  print "Old horse is:\n";
-  print Dumper($old);
+  my ($self,$name) = @_;
+  my $old = $self->get_from_memory($name);
+  if($old){
+      $self = $$old;
+      print "Welcome back Race horse $name!!\n";
+  }
+  else{
+      $self = $self->SUPER::named($name);
+      $self->{$_} = 0 for qw(wins places shows losses);
+      print "New Race horse named $name\n";
+  }
+      # print Dumper($self);
   
   $self;
 }
+
 sub won { shift->{wins}++; }
 sub placed { shift->{places}++; }
 sub showed { shift->{shows}++; }
@@ -74,9 +82,9 @@ sub set_all{
     return $self;
 }
 sub get_from_memory{
-    my $self = shift;
-    my $path = $self->getFilePath;
-    print "Getting ".(ref $self)." from $path\n";
+    my ($self,$name) = @_;
+    my $path = $self->getFilePath($name);
+    print "Getting ".(ref $self || $self)." $name from $path\n";
     if(-f $path){
         return retrieve($path);
     }
@@ -86,8 +94,9 @@ sub get_from_memory{
 }
 
 sub getFilePath{
-    my $self = shift;
-    my $name = $self->get_name;
+    my ($self,$name) = @_;
+    $name = $name // $self->get_name; 
+    $name = toBareword($name);
     if(! -d 'racehorses'){
         mkdir 'racehorses';
     }
@@ -95,16 +104,17 @@ sub getFilePath{
 }
 
 sub store_to_memory{
-    my $self = shift;
-    my $path = $self->getFilePath;
-    print "Storing ".(ref $self)." to $path\n";
+    my ($self,$name) = @_;
+    $name = $name // $self->get_name; 
+    my $path = $self->getFilePath($name);
+    print "Storing ".(ref $self || $self)." $name to $path\n";
     nstore \$self, $path;
 }
 
 sub DESTROY{
     my $self = shift;
     my $name = $self->get_name;
-    $self->store_to_memory;
+    $self->store_to_memory($name);
     print "RIP $name.\n";
 }
 =head1 AUTHOR

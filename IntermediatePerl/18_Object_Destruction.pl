@@ -25,7 +25,10 @@ sub stuff{
 
 sub ex_1{
     my $runner = RaceHorse->named('Billy Boy');
-    $runner->won;
+    $runner->won for(0..2);
+    $runner->lost for(0..1);
+    $runner->placed for(0..4);
+    $runner->showed for(0..3);
     print $runner->get_name, ' has standings ', $runner->standings, ".\n";
 }
 
