@@ -1,7 +1,63 @@
 #! /usr/bin/perl
 use Data::Dumper;
+use Math::Combinatorics;
 $Data::Dumper::Sortkeys = 1;
 
+multiset_test();
+
+sub multiset_test{
+    my $count = 3;
+    my $combiner = Math::Combinatorics->new( count=>$count , data=>[qw(1 2 3 4)] , frequency=>frequencyArrayRef(4,1) );
+    my @sets = ();
+    
+    while (my @set = $combiner->next_multiset){
+        push(@sets,\@set);
+    }
+    
+    printSet(@$_) for (@sets);
+    
+    # Sort through each index of the array
+    @sets = sort {
+        my @internal_set_a = @$a;
+        my @internal_set_b = @$b;
+        for(0..$#internal_set_a){
+            my $compFunc = numCompareAtIndex($_);
+            my $result = &$compFunc($a,$b);
+            return $result if($result != 0);
+        }
+        return 0;
+    } @sets;
+    
+    print "After ----\n";
+    printSet(@$_) for (@sets);
+    
+        
+    sub numCompareAtIndex{
+        my $index = shift;
+        my $comparison_sub = sub {$a->[$index] <=> $b->[$index]};
+        return $comparison_sub;
+    }
+    
+    sub frequencyArrayRef{
+        my ($amount,$value) = @_;
+        my $arrayRef = [];
+        
+        push(@$arrayRef,$value) for (0..($amount-1));
+        
+        return $arrayRef;
+    }
+    
+    
+    sub printSet{
+        my @set = @_;        
+        print '(';
+        for(0..$#set){
+            print $set[$_];
+            print ', ' if($_ != $#set);
+        }
+        print ")\n";
+    }
+}
 # trim with prototypes
 sub trim (\$){
     my ($string) = @_;

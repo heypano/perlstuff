@@ -10,6 +10,7 @@ What I did was:
 =================================
  
 sudo cpan Module::Starter;
+sudo cpan Software::License; #To avoid errors about licenses;
 mkdir ~/.module-starter/;
 echo -e "Author: Pano Papadatos\nemail: pano@heypano.com\nbuilder: Module::Build\nverbose: 1\nplugins: Module::Starter::AddModule" > ~/.module-starter/config;
 cd ~/checkouts/LearningPerl/IntermediatePerl/;

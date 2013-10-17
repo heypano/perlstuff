@@ -1,12 +1,20 @@
-package Animal;
+package Pano::Util;
 
 use 5.006;
 use strict;
+use encoding 'utf8';
+use utf8;
 use warnings FATAL => 'all';
-use parent qw(LivingCreature);
+use Exporter qw/import/;
+our @EXPORT = qw/toBareword fromBareword/;
+our @EXPORT_OK = ();
+our %EXPORT_TAGS = (
+  all       => [ @EXPORT, @EXPORT_OK ],
+);
+
 =head1 NAME
 
-Animal - The great new Animal!
+Pano::Util - Static Utility Methods 
 
 =head1 VERSION
 
@@ -19,80 +27,48 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use Animal;
-
-    my $foo = Animal->new();
-    ...
+This module provides various random utilities that Pano Papadatos made.
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+toBareword - Converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword)
 
 =head1 SUBROUTINES/METHODS
 
-=head2 function1
+=head2 
+toBareword
+Usage: converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword)
+Arguments: (0) the string to convert
+Returns: the converted string
 
+Conversion Method
+- A single underscore is converted into 2 _s
+- A single zero is converted into 2 0s
+- A number is converted into _number (To catch things that start with numbers)
+- Any non [a-zA-Z] character is converted into _0_ plus its numeric value (ord) (e.g. _123)
 =cut
 
-sub default_color{'Muddy'};
-
-sub get_color{
-    ref(my $self = shift) or die("get_color needs a reference");
-    return $self->{color};
+sub toBareword {
+    my ($string) = @_;
+    return if(!defined($string));
+    $string =~ s/_/__/g;
+    $string =~ s/0/00/g;
+    $string =~ s/([0-9]+)/_$1/g;
+    $string =~ s/([^a-zA-Z0-9_]+)/join('',map {'_0_'.ord($_)} split('',$1))/eg;
+    return $string;
 }
-
-sub set_color{
-    ref(my $self = shift) or die("set_color needs a reference");
-    my $color = shift;
-    $self->{color} = $color;
-    return $self;
-}
-sub get_name{
-    ref(my $self = shift) or die("get_name needs a reference");
-    return $self->{name};
-}
-
-sub set_name{
-    ref(my $self = shift) or die("set_name needs a reference");
-    my $name = shift;
-    $self->{name} = $name;
-    return $self;
-}
-
-sub named{
-    ref(my $class = shift) and die "class name needed";
-    my $name = shift;
-    my $animal = {name => $name, color => $class->default_color};
-    bless $animal, $class;  
-    return $animal;
-}
-
-sub eat{
-    my $self = shift;
-    my $food = shift;
-    print "A ".(ref $self)." named ".$self->get_name." just ate ".$food.".\n";
-}
-
-sub DESTROY{
-    my $self = shift;
-    print "A ".(ref $self)." named ".$self->get_name." has died. RIP.\n"; 
-}
-
-sub speak {
-  my $class = shift;
-  $class->SUPER::speak($class->sound);
-}
-
-=head2 function2
-
+=head2 
+fromBareword (The opposite of toBareword)
 =cut
 
-sub function2 {
+sub fromBareword{
+    my ($string) = @_;
+    return if(!defined($string));
+    $string =~ s/_0_([0-9]+)/chr($1)/eg;
+    $string =~ s/_([0-9]+)/$1/g;
+    $string =~ s/00/0/g;
+    $string =~ s/__/_/g;
+    return $string;
 }
 
 =head1 AUTHOR
@@ -101,8 +77,8 @@ Pano Papadatos, C<< <pano at heypano.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-./animal at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=./Animal>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-pano-util at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Pano-Util>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 
@@ -112,7 +88,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Animal
+    perldoc Pano::Util
 
 
 You can also look for information at:
@@ -121,19 +97,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=./Animal>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Pano-Util>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/./Animal>
+L<http://annocpan.org/dist/Pano-Util>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/./Animal>
+L<http://cpanratings.perl.org/d/Pano-Util>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/./Animal/>
+L<http://search.cpan.org/dist/Pano-Util/>
 
 =back
 
@@ -184,4 +160,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Animal
+1; # End of Pano::Util

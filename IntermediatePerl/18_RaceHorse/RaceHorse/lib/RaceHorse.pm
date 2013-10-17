@@ -1,12 +1,14 @@
-package Animal;
+package RaceHorse;
 
 use 5.006;
 use strict;
 use warnings FATAL => 'all';
-use parent qw(LivingCreature);
+use parent qw/Horse/;
+use Storable qw/nstore retrieve/;
+use Data::Dumper;
 =head1 NAME
 
-Animal - The great new Animal!
+RaceHorse - The great new RaceHorse!
 
 =head1 VERSION
 
@@ -23,9 +25,9 @@ Quick summary of what the module does.
 
 Perhaps a little code snippet.
 
-    use Animal;
+    use RaceHorse;
 
-    my $foo = Animal->new();
+    my $foo = RaceHorse->new();
     ...
 
 =head1 EXPORT
@@ -35,74 +37,84 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =head1 SUBROUTINES/METHODS
 
-=head2 function1
+=head2 named
 
 =cut
 
-sub default_color{'Muddy'};
-
-sub get_color{
-    ref(my $self = shift) or die("get_color needs a reference");
-    return $self->{color};
+## extend parent constructor:
+sub named {
+  my $self = shift->SUPER::named(@_);
+  $self->{$_} = 0 for qw(wins places shows losses);
+  my $old = $self->get_from_memory;
+  print "New Race horse named @_\n";
+  print "Old horse is:\n";
+  print Dumper($old);
+  
+  $self;
+}
+sub won { shift->{wins}++; }
+sub placed { shift->{places}++; }
+sub showed { shift->{shows}++; }
+sub lost { shift->{losses}++; }
+sub standings {
+  my $self = shift;
+  join ', ', map "$self->{$_} $_", qw(wins places shows losses);
 }
 
-sub set_color{
-    ref(my $self = shift) or die("set_color needs a reference");
-    my $color = shift;
-    $self->{color} = $color;
+sub set_won{$_[0]->{wins} = $_[1];$_[0];}
+sub set_places{$_[0]->{places} = $_[1];$_[0];}
+sub set_shows{$_[0]->{shows} = $_[1];$_[0];}
+sub set_losses{$_[0]->{losses} = $_[1];$_[0];}
+sub set_all{
+    my ($self, $wins, $places, $shows, $losses) = @_;
+    $self->set_won($wins);
+    $self->set_places($places);
+    $self->set_shows($shows);
+    $self->set_losses($losses);
     return $self;
 }
-sub get_name{
-    ref(my $self = shift) or die("get_name needs a reference");
-    return $self->{name};
-}
-
-sub set_name{
-    ref(my $self = shift) or die("set_name needs a reference");
-    my $name = shift;
-    $self->{name} = $name;
-    return $self;
-}
-
-sub named{
-    ref(my $class = shift) and die "class name needed";
-    my $name = shift;
-    my $animal = {name => $name, color => $class->default_color};
-    bless $animal, $class;  
-    return $animal;
-}
-
-sub eat{
+sub get_from_memory{
     my $self = shift;
-    my $food = shift;
-    print "A ".(ref $self)." named ".$self->get_name." just ate ".$food.".\n";
+    my $path = $self->getFilePath;
+    print "Getting ".(ref $self)." from $path\n";
+    if(-f $path){
+        return retrieve($path);
+    }
+    else{
+        return undef;
+    }
+}
+
+sub getFilePath{
+    my $self = shift;
+    my $name = $self->get_name;
+    if(! -d 'racehorses'){
+        mkdir 'racehorses';
+    }
+    return "racehorses/$name.txt";
+}
+
+sub store_to_memory{
+    my $self = shift;
+    my $path = $self->getFilePath;
+    print "Storing ".(ref $self)." to $path\n";
+    nstore \$self, $path;
 }
 
 sub DESTROY{
     my $self = shift;
-    print "A ".(ref $self)." named ".$self->get_name." has died. RIP.\n"; 
+    my $name = $self->get_name;
+    $self->store_to_memory;
+    print "RIP $name.\n";
 }
-
-sub speak {
-  my $class = shift;
-  $class->SUPER::speak($class->sound);
-}
-
-=head2 function2
-
-=cut
-
-sub function2 {
-}
-
 =head1 AUTHOR
 
 Pano Papadatos, C<< <pano at heypano.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-./animal at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=./Animal>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-racehorse at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=RaceHorse>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 
@@ -112,7 +124,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Animal
+    perldoc RaceHorse
 
 
 You can also look for information at:
@@ -121,19 +133,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=./Animal>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=RaceHorse>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/./Animal>
+L<http://annocpan.org/dist/RaceHorse>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/./Animal>
+L<http://cpanratings.perl.org/d/RaceHorse>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/./Animal/>
+L<http://search.cpan.org/dist/RaceHorse/>
 
 =back
 
@@ -184,4 +196,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Animal
+1; # End of RaceHorse
