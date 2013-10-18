@@ -4,6 +4,7 @@ use strict;
 use warnings FATAL => 'all';
 use Test::More;
 use Math::BaseCalc;
+use IO::Null;
 use feature "state";
 # perl -T -Mblib t/util.t
 
@@ -41,10 +42,16 @@ BEGIN {
                             );
     
     # Gets all possible multisets of a specific length (with multiplication) and tests them ($numValues ^ $length iterations)
-    while (defined(my $next = next_element(9,@importantStuff))){
-        test_word($next);
+    print "\nTesting all possible combinations of special characters up to a string length of 9 (with repetition - will take a LONG time).\n";
+    print "Testing back and forth conversion as well as bareword syntax (letters, digits + underscores, no digits in the beginning):\n...\n...\n";
+    my $goodCount = 0;
+    my $badCount = 0;
+    while (defined(my $next = next_element(scalar(@importantStuff),@importantStuff))){
+        test_word($next)?($goodCount++):($badCount++);
     }
-    
+    print "Tested $goodCount words successfully.\n";
+    print "$badCount problems found.\n";
+        
     # Provides the (next) concatenated multiset combination of length $stringLength for an @array
     sub next_element{
         my ($stringLength,@array) = @_;
@@ -92,12 +99,18 @@ BEGIN {
         my ($word) = @_;
         my $bareword = Pano::Util::toBareword($word);
         my $original = Pano::Util::fromBareword($bareword);
-        
+        my $success = 1;
         # Tests if the conversion is 1-1
-        is($word, $original, "Converted Successfully: $word");
-        
+        if ($word ne $original){
+            print "PROBLEM: $word was changed to $original\n" ;
+            $success = 0;
+        }
         # Check if the conversion made a proper bareword (does not start with a number, only has letters digits and underscores)
-        ok($bareword =~ /^[a-zA-Z_][a-zA-Z0-9_]*$/, 'Is a proper bareword: '.$bareword);
+        if ($bareword !~ /^[a-zA-Z_][a-zA-Z0-9_]*$/){
+            print "PROBLEM: $bareword is not a proper bareword (Does not contain\n";
+            $success = 0;    
+        }
+        return $success;
     }
     
 }
