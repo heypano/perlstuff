@@ -3,8 +3,25 @@ use Data::Dumper;
 use Math::Combinatorics;
 $Data::Dumper::Sortkeys = 1;
 
-multiset_test();
+call_stateful_anonymous_function();
 
+# Returning an anonymous function and calling it
+sub call_stateful_anonymous_function{
+    my $fakeObject = returns_anonymous_function();
+    for(1..10){
+        print $fakeObject->()."\n";
+    }
+}
+
+sub returns_stateful_anonymous_function{
+    my $x = 0;
+    return sub{
+        $x++;
+        return "No ".$x;
+    }
+}
+
+# Multiset with complicated sorting function
 sub multiset_test{
     my $count = 3;
     my $combiner = Math::Combinatorics->new( count=>$count , data=>[qw(1 2 3 4)] , frequency=>frequencyArrayRef(4,1) );

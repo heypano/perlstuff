@@ -1,7 +1,0 @@
-ok 1 - use Pano::Util;
-ok 2 - PASS: Pano::Util::toBareword is defined
-ok 3 - PASS: Pano::Util::fromBareword is defined
-Testing all possible combinations of special characters up to a string length of 9 (with repetition):
-Tested 729 words successfully.
-0 problems found.
-1..3

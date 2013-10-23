@@ -1,0 +1,11 @@
+ok 1 - use Pano::Util;
+ok 2 - PASS: Pano::Util::toBareword is defined
+ok 3 - PASS: Pano::Util::fromBareword is defined
+
+Testing all possible combinations of special characters up to a string length of 9 (with repetition - will take a LONG time).
+Testing back and forth conversion as well as bareword syntax (letters, digits + underscores, no digits in the beginning):
+...
+...
+Tested 387420489 words successfully.
+0 problems found.
+1..3
