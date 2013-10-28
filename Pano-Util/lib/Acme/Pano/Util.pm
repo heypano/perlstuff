@@ -12,9 +12,11 @@ our %EXPORT_TAGS = (
   all       => [ @EXPORT, @EXPORT_OK ],
 );
 
+# perl Build.PL; ./Build; ./Build disttest;./Build dist; perl Makefile.PL; sudo make;
+# https://pause.perl.org/pause/authenquery?ACTION=add_uri
 =head1 NAME
 
-Pano::Util - Static Utility Methods 
+Acme::Pano::Util - Static Utility Methods 
 
 =head1 VERSION
 
@@ -22,7 +24,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.011';
 
 
 =head1 SYNOPSIS
@@ -31,7 +33,8 @@ This module provides various random utilities that Pano Papadatos made.
 
 =head1 EXPORT
 
-toBareword - Converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword),
+toBareword - Converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword)
+
 fromBareword - Converts a string that was returned using toBareword back to its original form
 
 =head1 SUBROUTINES/METHODS
@@ -39,13 +42,19 @@ fromBareword - Converts a string that was returned using toBareword back to its 
 =head2 toBareword
 
 Usage: converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword)
+
 Arguments: (0) the string to convert
+
 Returns: the converted string
 
 Conversion Method
+
 - A single underscore is converted into 2 _s
+
 - A single zero is converted into 2 0s
+
 - A number is converted into _number (To catch things that start with numbers)
+
 - Any non [a-zA-Z] character is converted into _0_ plus its numeric value (ord) (e.g. _123)
 
 =cut
@@ -63,7 +72,9 @@ sub toBareword {
 =head2 fromBareword
 
 Usage: converts any string that was returned using "toBareword" back to its original form
+
 Arguments: (0) the string to convert
+
 Returns: the converted string
 
 =cut
@@ -84,8 +95,8 @@ Pano Papadatos, C<< <pano at heypano.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-pano-util at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Pano-Util>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-acme-pano-util at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Acme-Pano-Util>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 
@@ -95,7 +106,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Pano::Util
+    perldoc Acme::Pano::Util
 
 
 You can also look for information at:
@@ -104,19 +115,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Pano-Util>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Acme-Pano-Util>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/Pano-Util>
+L<http://annocpan.org/dist/Acme-Pano-Util>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/Pano-Util>
+L<http://cpanratings.perl.org/d/Acme-Pano-Util>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/Pano-Util/>
+L<http://search.cpan.org/dist/Acme-Pano-Util/>
 
 =back
 
@@ -167,4 +178,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Pano::Util
+1; # End of Acme::Pano::Util
