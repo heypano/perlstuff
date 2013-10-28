@@ -4,10 +4,10 @@ use warnings FATAL => 'all';
 use Module::Build;
 
 my $builder = Module::Build->new(
-    module_name         => 'Pano::Util',
+    module_name         => 'Acme::Pano::Util',
     license             => 'Artistic_2_0',
     dist_author         => q{Pano Papadatos <pano@heypano.com>},
-    dist_version_from   => 'lib/Pano/Util.pm',
+    dist_version_from   => 'lib/Acme/Pano/Util.pm',
     release_status      => 'stable',
     configure_requires => {
         'Module::Build' => 0,

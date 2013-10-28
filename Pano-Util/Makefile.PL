@@ -2,8 +2,8 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-  'NAME' => 'Pano::Util',
-  'VERSION_FROM' => 'lib/Pano/Util.pm',
+  'NAME' => 'Acme::Pano::Util',
+  'VERSION_FROM' => 'lib/Acme/Pano/Util.pm',
   'PREREQ_PM' => {
                    'Test::More' => 0
                  },

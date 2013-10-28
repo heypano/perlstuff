@@ -9,14 +9,14 @@ use feature "state";
 # perl -T -Mblib t/util.t
 
 BEGIN {
-  use_ok( 'Pano::Util' ) || BAIL_OUT();
+  use_ok( 'Acme::Pano::Util' ) || BAIL_OUT();
 }
 
 # Defined tests
 
 {
     my @functions = qw/toBareword fromBareword/;
-    my $prefix = 'Pano::Util::';
+    my $prefix = 'Acme::Pano::Util::';
     
     @functions = map {$prefix.$_} @functions; 
     
@@ -97,8 +97,8 @@ BEGIN {
     # Tests one word conversion back and forth
     sub test_word{
         my ($word) = @_;
-        my $bareword = Pano::Util::toBareword($word);
-        my $original = Pano::Util::fromBareword($bareword);
+        my $bareword = Acme::Pano::Util::toBareword($word);
+        my $original = Acme::Pano::Util::fromBareword($bareword);
         my $success = 1;
         # Tests if the conversion is 1-1
         if ($word ne $original){

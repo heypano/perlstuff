@@ -1,4 +1,4 @@
-package Pano::Util;
+package Acme::Pano::Util;
 
 use 5.006;
 use strict;
@@ -31,12 +31,13 @@ This module provides various random utilities that Pano Papadatos made.
 
 =head1 EXPORT
 
-toBareword - Converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword)
+toBareword - Converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword),
+fromBareword - Converts a string that was returned using toBareword back to its original form
 
 =head1 SUBROUTINES/METHODS
 
-=head2 
-toBareword
+=head2 toBareword
+
 Usage: converts any string to a string with only letters, underscores and numbers that does not start with a number (bareword)
 Arguments: (0) the string to convert
 Returns: the converted string
@@ -46,6 +47,7 @@ Conversion Method
 - A single zero is converted into 2 0s
 - A number is converted into _number (To catch things that start with numbers)
 - Any non [a-zA-Z] character is converted into _0_ plus its numeric value (ord) (e.g. _123)
+
 =cut
 
 sub toBareword {
@@ -57,8 +59,13 @@ sub toBareword {
     $string =~ s/([^a-zA-Z0-9_]+)/join('',map {'_0_'.ord($_)} split('',$1))/eg;
     return $string;
 }
-=head2 
-fromBareword (The opposite of toBareword)
+
+=head2 fromBareword
+
+Usage: converts any string that was returned using "toBareword" back to its original form
+Arguments: (0) the string to convert
+Returns: the converted string
+
 =cut
 
 sub fromBareword{

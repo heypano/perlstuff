@@ -7,7 +7,7 @@ use Test::More;
 plan tests => 1;
 
 BEGIN {
-    use_ok( 'Pano::Util' ) || print "Bail out!\n";
+    use_ok( 'Acme::Pano::Util' ) || print "Bail out!\n";
 }
 
-diag( "Testing Pano::Util $Pano::Util::VERSION, Perl $], $^X" );
+diag( "Testing Acme::Pano::Util $Acme::Pano::Util::VERSION, Perl $], $^X" );

@@ -4,7 +4,7 @@
       "Pano Papadatos <pano@heypano.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.120351",
+   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.132830",
    "license" : [
       "artistic_2"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "Pano-Util",
+   "name" : "Acme-Pano-Util",
    "prereqs" : {
       "build" : {
          "requires" : {
@@ -31,8 +31,8 @@
       }
    },
    "provides" : {
-      "Pano::Util" : {
-         "file" : "lib/Pano/Util.pm",
+      "Acme::Pano::Util" : {
+         "file" : "lib/Acme/Pano/Util.pm",
          "version" : "0.01"
       }
    },
