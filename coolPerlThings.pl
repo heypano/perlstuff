@@ -3,7 +3,21 @@ use Data::Dumper;
 use Math::Combinatorics;
 $Data::Dumper::Sortkeys = 1;
 
-call_stateful_anonymous_function();
+match_ascii();
+
+# Match all Ascii characters
+sub match_ascii{
+    my @words = ('blasda!@#!@#4441242124@2--_/123@@___','±aaaa±','μπλaaά');
+    foreach (@words){
+        my @nonAsciiMatches = $_ =~ /[^[:ascii:]]+/g;
+        if(@nonAsciiMatches == 0){
+            print "$_ is only ascii\n";
+        }else{
+            print "$_ is not only ascii\n"
+        }
+        print Dumper(\@nonAsciiMatches);
+    }
+}
 
 # Returning an anonymous function and calling it
 sub call_stateful_anonymous_function{
