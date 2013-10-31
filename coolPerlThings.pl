@@ -6,28 +6,40 @@ $Data::Dumper::Sortkeys = 1;
 test_non_ascii();
 # Replace non-ascii characters (function in regular expresion)
 sub test_non_ascii{
-    my $wordToReplace='asdasdasdασγξεκαεφ汉字漢±±asdasdasd';
-    my $escapedWord = escape_non_ascii($wordToReplace);
-    my $unescapedWord = unescape_non_ascii($escapedWord);
+    my $wordToReplace='asdasdasdασγξεκαεφ汉字漢±±00012312300_0____)_asdasdasd';
+    my $escapedWord = _escapeNonASCII($wordToReplace);
+    my $unescapedWord = _unescapeNonASCII($escapedWord);
     print "a: $wordToReplace\nb: $escapedWord\nc: $unescapedWord\n";  
 }
 
-sub escape_non_ascii{
-    my ($word) = @_;
-    # Replace single underscore with double underscore
-    $word =~ s/_/__/g;
-    # Replace non ascii characters with _charcode
-    $word =~ s/([^[:ascii:]])/'_'.ord($1)/ge;
-    return $word;
+# Escapes a string so that all characters are ASCII
+sub _escapeNonASCII{
+    my ($string) = @_;
+    return if(!defined($string));
+    # Escape single underscore with double underscore
+    $string =~ s/_/__/g;
+    # Escape single zero with double zero 
+    $string =~ s/0/00/g;
+    # Escape numbers with underscore number
+    $string =~ s/([0-9]+)/_$1/g;
+    # Escape non-ascii characters with _0_charcode
+    $string =~ s/([^[:ascii:]]+)/join('',map {'_0_'.ord($_)} split('',$1))/eg;
+    return $string;
 }
 
-sub unescape_non_ascii{
-    my ($word) = @_;
-    # Replace _charcode with non-ascii character
-    $word =~ s/_([\d]+)/chr($1)/eg;
-    # Replace double underscores with single underscore
-    $word =~ s/__/_/g;
-    return $word;
+# Given a string escaped using _escapeNonASCII, returns the original string
+sub _unescapeNonASCII{
+    my ($string) = @_;
+    return if(!defined($string));
+    # Unescape non-ascii characters
+    $string =~ s/_0_([0-9]+)/chr($1)/eg;
+    # Unescape numbers
+    $string =~ s/_([0-9]+)/$1/g;
+    # Unescape single zeros
+    $string =~ s/00/0/g;
+    # Unescape single underscores
+    $string =~ s/__/_/g;
+    return $string;
 }
 
 
