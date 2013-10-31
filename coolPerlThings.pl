@@ -3,10 +3,36 @@ use Data::Dumper;
 use Math::Combinatorics;
 $Data::Dumper::Sortkeys = 1;
 
-match_ascii();
+test_non_ascii();
+# Replace non-ascii characters (function in regular expresion)
+sub test_non_ascii{
+    my $wordToReplace='asdasdasdασγξεκαεφ汉字漢±±asdasdasd';
+    my $escapedWord = escape_non_ascii($wordToReplace);
+    my $unescapedWord = unescape_non_ascii($escapedWord);
+    print "a: $wordToReplace\nb: $escapedWord\nc: $unescapedWord\n";  
+}
 
-# Match all Ascii characters
-sub match_ascii{
+sub escape_non_ascii{
+    my ($word) = @_;
+    # Replace single underscore with double underscore
+    $word =~ s/_/__/g;
+    # Replace non ascii characters with _charcode
+    $word =~ s/([^[:ascii:]])/'_'.ord($1)/ge;
+    return $word;
+}
+
+sub unescape_non_ascii{
+    my ($word) = @_;
+    # Replace _charcode with non-ascii character
+    $word =~ s/_([\d]+)/chr($1)/eg;
+    # Replace double underscores with single underscore
+    $word =~ s/__/_/g;
+    return $word;
+}
+
+
+# Match all non Ascii characters
+sub match_non_ascii{
     my @words = ('blasda!@#!@#4441242124@2--_/123@@___','±aaaa±','μπλaaά');
     foreach (@words){
         my @nonAsciiMatches = $_ =~ /[^[:ascii:]]+/g;
