@@ -1,5 +1,6 @@
-Revision history for Pano-Util
+Revision history for Perl module Acme::Pano::Util
 
-0.01    Date/time
-        First version, released on an unsuspecting world.
+0.011 2013-10-28
 
+0.01  2013-10-28
+ - First version, released on an unsuspecting world.
